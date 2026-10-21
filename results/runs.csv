@@ -1,1 +1,3 @@
 timestamp,config,dataset,attack_heldout,model,seed,accuracy,precision,recall,f1,fpr,notes
+2026-10-21T21:09:14,window1000_rows50000,car-hacking,none,rf-200,42,1.0000,1.0000,1.0000,1.0000,0.0000,初步验证：随机划分，未做时间隔离
+2026-10-21T21:09:41,window1000_rows200000,car-hacking,none,rf-200,42,0.9933,0.9286,1.0000,0.9630,0.0073,初步验证：随机划分，未做时间隔离

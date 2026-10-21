@@ -33,11 +33,29 @@ _NORMAL_RE = re.compile(
 
 
 def load_attack(raw_dir: Path | str, attack: str, max_rows: int | None = None) -> pd.DataFrame:
-    """读取一个攻击数据集（CSV，无表头，末列为 R/T 标记）。"""
+    """读取一个攻击数据集（CSV，无表头，末列为 R/T 标记）。
+
+    注意：DLC 小于 8 的行字段数不足 12，pandas 会把末列（R/T）错位读进
+    d{DLC} 列。这里按 DLC 把它挪回 flag 列，再把缺失字节补 0。
+    """
     path = Path(raw_dir) / ATTACK_FILES[attack]
-    df = pd.read_csv(path, header=None, names=_ATTACK_COLS, nrows=max_rows)
-    df["can_id"] = df["can_id"].astype(str).str.lower()
-    df["label"] = (df.pop("flag").astype(str).str.strip() == "T").astype("int8")
+    df = pd.read_csv(path, header=None, names=_ATTACK_COLS, nrows=max_rows, dtype=str)
+
+    dlc = df["dlc"].astype(int)
+    for k in range(8):
+        short = dlc.eq(k) & df["flag"].isna()
+        if short.any():
+            df.loc[short, "flag"] = df.loc[short, f"d{k}"]
+            df.loc[short, f"d{k}"] = "0"
+
+    df["can_id"] = df["can_id"].str.lower()
+    df["label"] = (df["flag"].fillna("").str.strip() == "T").astype("int8")
+    df["timestamp"] = df["timestamp"].astype(float)
+    df["dlc"] = dlc.astype("int16")
+    for i in range(8):
+        df[f"d{i}"] = pd.to_numeric(df[f"d{i}"], errors="coerce").fillna(0).astype("int16")
+
+    df.pop("flag")
     df["attack_type"] = attack
     return df[BASE_COLS]
 

@@ -1,0 +1,42 @@
+{
+ "Normal": {
+  "file": "Normal.parquet",
+  "rows": 988871,
+  "attack_rows": 0,
+  "attack_ratio": 0.0,
+  "can_ids": 27,
+  "size_mb": 9.5
+ },
+ "DoS": {
+  "file": "DoS.parquet",
+  "rows": 3665771,
+  "attack_rows": 587521,
+  "attack_ratio": 0.1603,
+  "can_ids": 27,
+  "size_mb": 30.8
+ },
+ "Fuzzy": {
+  "file": "Fuzzy.parquet",
+  "rows": 3838860,
+  "attack_rows": 491847,
+  "attack_ratio": 0.1281,
+  "can_ids": 2048,
+  "size_mb": 36.9
+ },
+ "RPM": {
+  "file": "RPM.parquet",
+  "rows": 4621702,
+  "attack_rows": 654897,
+  "attack_ratio": 0.1417,
+  "can_ids": 26,
+  "size_mb": 39.8
+ },
+ "gear": {
+  "file": "gear.parquet",
+  "rows": 4443142,
+  "attack_rows": 597252,
+  "attack_ratio": 0.1344,
+  "can_ids": 26,
+  "size_mb": 38.8
+ }
+}

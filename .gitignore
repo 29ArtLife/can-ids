@@ -1,10 +1,11 @@
-# 数据集（体积大，从官方页面获取）
+# 数据集（体积大，从官方页面获取 / Release 下载）
 data/raw/*
-data/interim/*
 data/processed/*
 !data/raw/.gitkeep
-!data/interim/.gitkeep
 !data/processed/.gitkeep
+
+# 注意：data/interim/ 下的 parquet 会入库（约 156MB），
+# 这样组员 clone 后无需重新解析。若仓库过大可改回排除。
 
 # Python
 __pycache__/

@@ -1,0 +1,31 @@
+# 数据集（体积大，从官方页面获取）
+data/raw/*
+data/interim/*
+data/processed/*
+!data/raw/.gitkeep
+!data/interim/.gitkeep
+!data/processed/.gitkeep
+
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+*.egg-info/
+
+# 模型权重与缓存
+*.pt
+*.pth
+*.onnx
+*.pkl
+*.joblib
+.cache/
+
+# 编辑器
+.idea/
+.vscode/
+*.swp
+
+# 系统
+.DS_Store
+Thumbs.db
